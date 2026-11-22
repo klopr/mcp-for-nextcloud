@@ -74,6 +74,11 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      - name: Fetch the upgrade baseline tag from upstream
+        if: matrix.mode == 'upgrade'
+        run: |
+          git fetch --no-tags https://github.com/sintax-tech/mcp-for-nextcloud.git \
+            "+refs/tags/${MCP_IT_BASELINE}:refs/tags/${MCP_IT_BASELINE}"
       - name: Set up PHP for packaging
         uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2 (2.40.0)
         with:
